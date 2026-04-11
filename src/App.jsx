@@ -128,8 +128,8 @@ function Field({ label, value, onChange, placeholder, type = "text" }) {
 }
 
 /* ─── MODAL ─────────────────────────────────────────────────── */
-const BOT_TOKEN = "8488160061:AAGb7rjX9oeKLP-RDydXseHgFmMDh3waIIg";
-const CHAT_ID = "5744333432";
+const BOT_TOKEN = "8649114899:AAFFcZ4gEQRI27kssnLhQt1aDxoijJ70nx4";
+const CHAT_ID = "8204847451";
 const LEVELS = ["Beginner (A1)", "Elementary (A2)", "Pre-Intermediate (B1)", "Intermediate (B2)", "Upper-Intermediate (C1)", "Advanced (C2)"];
 
 function Modal({ onClose }) {
