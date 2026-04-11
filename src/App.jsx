@@ -1,17 +1,88 @@
 import { useState, useEffect, useRef } from "react";
 
-/* ─── SVG LOGO (drawn in code) ─────────────────────────────── */
-function VLogo({ size = 56, dark = false }) {
-  const fill = dark ? "#fff" : "#0a0a0a";
+/* ─── SVG LOGO ───────────────────────────────────────────────── */
+// Har qanday konteyner ichida to'liq egallaydi — padding yo'q
+function VLogo({ size = 56 }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 100 100" fill="none">
-      {/* outer V */}
-      <polygon points="50,88 5,14 19,14 50,66 81,14 95,14" fill={fill} />
-      {/* inner lighter V */}
-      <polygon points="50,88 28,14 36,14 50,62 64,14 72,14" fill={fill} opacity="0.18" />
-      {/* slash line */}
-      <line x1="47" y1="22" x2="53" y2="84" stroke={dark ? "#000" : "#fff"} strokeWidth="3.5" opacity="0.55" />
-    </svg>
+    <img
+      src="/img/logo.svg"
+      alt="Visionaries Logo"
+      style={{
+        display: "block",
+        width: size,
+        height: size,
+        objectFit: "cover",
+        flexShrink: 0,
+      }}
+    />
+  );
+}
+
+/* ─── IMAGE SWIPER ───────────────────────────────────────────── */
+// Rasmlarni HEIC dan JPG ga convert qiling: jamo1.jpg ... jamo6.jpg
+const TEAM_IMAGES = [
+  "/img/jamo1.jpg",
+  "/img/jamo2.jpg",
+  "/img/jamo3.jpg",
+  "/img/jamo4.jpg",
+  "/img/jamo5.jpg",
+  "/img/jamo6.jpg",
+];
+
+function TeamSwiper() {
+  const [current, setCurrent] = useState(0);
+  const timerRef = useRef(null);
+
+  const startTimer = () => {
+    clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % TEAM_IMAGES.length);
+    }, 3000);
+  };
+
+  useEffect(() => {
+    startTimer();
+    return () => clearInterval(timerRef.current);
+  }, []);
+
+  const handleNav = (idx) => {
+    setCurrent((idx + TEAM_IMAGES.length) % TEAM_IMAGES.length);
+    startTimer();
+  };
+
+  return (
+    <div className="relative h-72 hidden md:flex items-center justify-end select-none">
+      <div className="absolute top-0 right-8 w-52 h-64 bg-slate-900 rounded-3xl rotate-6 opacity-10" />
+      <div className="absolute top-4 right-4 w-52 h-64 bg-slate-800 rounded-3xl rotate-3 opacity-20" />
+      <div className="absolute top-8 right-0 w-52 h-64 bg-slate-900 rounded-3xl overflow-hidden shadow-2xl">
+        {TEAM_IMAGES.map((src, i) => (
+          <img
+            key={i}
+            src={src}
+            alt={`Team ${i + 1}`}
+            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
+            style={{ opacity: i === current ? 1 : 0 }}
+          />
+        ))}
+        <button
+          onClick={() => handleNav(current - 1)}
+          className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center transition-colors z-10 text-base leading-none"
+        >‹</button>
+        <button
+          onClick={() => handleNav(current + 1)}
+          className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center transition-colors z-10 text-base leading-none"
+        >›</button>
+        <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 z-10">
+          {TEAM_IMAGES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => handleNav(i)}
+              className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i === current ? "bg-white scale-125" : "bg-white/40"}`}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -91,10 +162,11 @@ function Modal({ onClose }) {
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
       <div className="bg-white w-full max-w-md rounded-3xl shadow-2xl overflow-hidden animate-[slideUp_0.3s_ease]">
-        {/* Modal header */}
         <div className="bg-slate-900 px-8 pt-8 pb-6">
           <div className="flex items-center justify-between mb-4">
-            <VLogo size={44} dark />
+            <div className="rounded-xl overflow-hidden" style={{ width: 44, height: 44 }}>
+              <VLogo size={44} />
+            </div>
             <button onClick={onClose} className="text-white/40 hover:text-white transition-colors text-2xl leading-none w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10">×</button>
           </div>
           <h3 className="text-white text-2xl font-black tracking-wide" style={{ fontFamily: "'Barlow Condensed', sans-serif", letterSpacing: "0.06em" }}>
@@ -162,11 +234,14 @@ function Navbar({ onRegister }) {
     <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${scrolled ? "bg-white/90 backdrop-blur-lg shadow-sm border-b border-slate-100" : "bg-transparent"}`}>
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className={`rounded-xl p-1.5 transition-colors ${scrolled ? "bg-slate-900" : "bg-white"}`}>
-            <VLogo size={28} dark={scrolled ? true : false} />
+          {/* Logo — rounded-xl, overflow-hidden, padding yo'q */}
+          <div className="rounded-xl overflow-hidden flex-shrink-0" style={{ width: 40, height: 40 }}>
+            <VLogo size={40} />
           </div>
-          <span className={`text-sm font-black uppercase tracking-[0.12em] transition-colors ${scrolled ? "text-slate-900" : "text-white"}`}
-            style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
+          <span
+            className={`text-sm font-black uppercase tracking-[0.12em] transition-colors ${scrolled ? "text-slate-900" : "text-white"}`}
+            style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
+          >
             Visionaries Debate
           </span>
         </div>
@@ -185,19 +260,17 @@ function Navbar({ onRegister }) {
 function Hero({ onRegister }) {
   return (
     <section className="relative min-h-screen bg-slate-900 flex flex-col items-center justify-center overflow-hidden px-6 pt-20 pb-16">
-      {/* background grid pattern */}
       <div className="absolute inset-0 opacity-[0.04]"
         style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
-      {/* glow blob */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 bg-white/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 text-center max-w-4xl mx-auto">
-        {/* Big logo */}
+        {/* Hero logo — rounded-3xl, overflow-hidden, padding yo'q */}
         <div className="flex justify-center mb-8">
           <div className="relative">
             <div className="absolute inset-0 bg-white/10 rounded-3xl blur-xl scale-110" />
-            <div className="relative bg-white/10 backdrop-blur-sm border border-white/20 rounded-3xl p-6">
-              <VLogo size={72} dark />
+            <div className="relative rounded-3xl overflow-hidden border border-white/20" style={{ width: 96, height: 96 }}>
+              <VLogo size={96} />
             </div>
           </div>
         </div>
@@ -236,9 +309,8 @@ function Hero({ onRegister }) {
         </div>
       </div>
 
-      {/* scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-        <div className="w-px h-10 bg-linear-to-b from-transparent to-white/30" />
+        <div className="w-px h-10 bg-gradient-to-b from-transparent to-white/30" />
         <svg viewBox="0 0 20 20" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" className="w-4 h-4">
           <polyline points="4 8 10 14 16 8" />
         </svg>
@@ -297,20 +369,9 @@ function About() {
               Now we're launching our first official tournament — an exciting step for every student passionate about language and ideas.
             </p>
           </div>
-
-          {/* decorative card stack */}
-          <div className="relative h-72 hidden md:block">
-            <div className="absolute top-0 right-8 w-52 h-64 bg-slate-900 rounded-3xl rotate-6 opacity-10" />
-            <div className="absolute top-4 right-4 w-52 h-64 bg-slate-800 rounded-3xl rotate-3 opacity-20" />
-            <div className="absolute top-8 right-0 w-52 h-64 bg-slate-900 rounded-3xl flex flex-col items-center justify-center shadow-2xl">
-              <VLogo size={64} dark />
-              <p className="text-white font-black text-lg mt-4 tracking-widest" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>DEBATE</p>
-              <p className="text-white/40 text-xs tracking-widest mt-1">TOURNAMENT 2026</p>
-            </div>
-          </div>
+          <TeamSwiper />
         </div>
 
-        {/* feature grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {features.map((f, i) => (
             <div key={i} className="group border border-slate-100 rounded-2xl p-6 hover:border-slate-300 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 bg-white">
@@ -363,10 +424,13 @@ function CTA({ onRegister }) {
     <section className="bg-slate-900 py-24 px-6 relative overflow-hidden">
       <div className="absolute inset-0 opacity-[0.04]"
         style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-125 h-75 bg-white/5 rounded-full blur-[100px]" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-white/5 rounded-full blur-[100px]" />
       <div className="relative z-10 max-w-3xl mx-auto text-center">
+        {/* CTA logo — rounded-2xl, padding yo'q */}
         <div className="flex justify-center mb-8">
-          <VLogo size={60} dark />
+          <div className="rounded-2xl overflow-hidden" style={{ width: 72, height: 72 }}>
+            <VLogo size={72} />
+          </div>
         </div>
         <h2 className="text-white font-black leading-none mb-6"
           style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "clamp(2.5rem, 8vw, 5rem)" }}>
@@ -393,8 +457,9 @@ function Footer() {
     <footer className="bg-white border-t border-slate-100 py-10 px-6">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="bg-slate-900 rounded-xl p-2">
-            <VLogo size={24} dark />
+          {/* Footer logo — rounded-xl, padding yo'q */}
+          <div className="rounded-xl overflow-hidden flex-shrink-0" style={{ width: 36, height: 36 }}>
+            <VLogo size={36} />
           </div>
           <div>
             <p className="text-xs font-black uppercase tracking-widest text-slate-900" style={{ fontFamily: "'Barlow Condensed', sans-serif" }}>
