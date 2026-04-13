@@ -9,21 +9,23 @@ function Hero({ onRegister, t }) {
 
       <div className="relative z-10 text-center max-w-4xl mx-auto">
         <div className="flex justify-center mb-8">
-          <div className="relative">
+          <div className="relative pb-15 ">
             <div className="absolute inset-0 bg-white/10 rounded-3xl blur-xl scale-110" />
-            <div className="relative rounded-3xl overflow-hidden border border-white/20" style={{ width: 96, height: 96 }}>
-              <VLogo size={96} />
+            <div className="relative rounded-3xl overflow-hidden border border-white/20" style={{ width: 150, height: 150 }}>
+              <VLogo size={150} />
             </div>
           </div>
         </div>
 
-        <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-5 py-2 mb-8">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-white/70 text-xs font-semibold uppercase tracking-[0.2em]">{t.heroTag}</span>
-        </div>
+       <a
+            href="#about"
+            className="border border-white/20 text-white/70 bg-white/20 font-semibold pt-5 text-lg uppercase tracking-widest px-10 py-4 rounded-2xl hover:bg-white/10 transition-all duration-200"
+          >
+            {t.heroLearn}
+          </a>
 
         <h1
-          className="text-white font-black leading-none mb-6"
+          className="text-white font-black pt-15 leading-none mb-6"
           style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "clamp(3.5rem, 12vw, 8rem)", letterSpacing: "0.03em" }}
         >
           {t.heroTitle1}<br />
@@ -42,12 +44,7 @@ function Hero({ onRegister, t }) {
             {t.heroApply}
             <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
           </button>
-          <a
-            href="#about"
-            className="border border-white/20 text-white/70 font-semibold text-sm uppercase tracking-widest px-10 py-4 rounded-2xl hover:bg-white/10 transition-all duration-200"
-          >
-            {t.heroLearn}
-          </a>
+          
         </div>
       </div>
 

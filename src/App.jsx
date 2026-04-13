@@ -24,7 +24,7 @@ export default function App() {
 
       <Navbar onRegister={() => setModal(true)} lang={lang} setLang={setLang} t={t} />
       <Hero onRegister={() => setModal(true)} t={t} />
-      <Stats t={t} />
+      
        <InfoSection t={t} />
       <About t={t} />
      

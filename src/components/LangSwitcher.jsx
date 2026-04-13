@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-const LANG_LABELS = { uz: "O'z", ru: "Рус", en: "Eng" };
+const LANG_LABELS = { uz: "O'z", ru: "Ру", en: "En" };
 
 function LangSwitcher({ lang, setLang, scrolled }) {
   const [open, setOpen] = useState(false);
