@@ -12,13 +12,14 @@ function InfoSection({ t }) {
         </svg>
       ),
     },
-    {
-      bg: "bg-slate-50", textColor: "text-slate-900", subColor: "text-slate-400",
-      label: t.card2Label, value: t.card2Value, sub: t.card2Sub,
+   {
+      bg: "bg-slate-50", textColor: "text-slate-900", subColor: "text-slate-400", 
+      label: t.card4Label, value: t.card4Value, sub: t.card4Sub,
       icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-7 h-7 text-slate-600">
-          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-          <circle cx="12" cy="10" r="3"/>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-7 h-7">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
         </svg>
       ),
     },
@@ -34,14 +35,14 @@ function InfoSection({ t }) {
         </svg>
       ),
     },
-    {
+    
+     {
       bg: "bg-slate-900", textColor: "text-white", subColor: "text-white/40",
-      label: t.card4Label, value: t.card4Value, sub: t.card4Sub,
+      label: t.card2Label, value: t.card2Value, sub: t.card2Sub,
       icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" className="w-7 h-7">
-          <circle cx="12" cy="12" r="10"/>
-          <line x1="2" y1="12" x2="22" y2="12"/>
-          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-7 h-7 text-slate-600">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+          <circle cx="12" cy="10" r="3"/>
         </svg>
       ),
     },
