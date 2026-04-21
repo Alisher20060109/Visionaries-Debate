@@ -220,7 +220,7 @@ function PhoneField({ label, name, value, onChange }) {
       <label className="block text-sm mb-2 text-white/70">{label}</label>
 
       <div className="relative">
-        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50">
+        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/10">
           +998
         </span>
 
