@@ -254,14 +254,14 @@ function TextArea({ label, name, value, onChange }) {
 function SelectBox({ label, name, value, onChange }) {
   return (
     <div className="mb-4">
-      <label className="block text-sm mb-2 text-white/70">{label}</label>
+      <label className="block text-sm mb-2 text-white/50">{label}</label>
       <select
         name={name}
         value={value}
         onChange={onChange}
-        className="w-full h-11 px-4 rounded-xl bg-white/5 border border-white/10 text-gray-900 outline-none focus:border-cyan-400"
+        className="w-full h-11 px-4 rounded-xl bg-white/20  border border-white/10 text-gray-900 text-gray-100 outline-none focus:border-cyan-400"
       >
-        <option value=""> Aniq bilmayman</option>
+        <option  value=""> Aniq bilmayman</option>
         <option value="Ha">Albatta kelaman</option>
         <option value="Yo'q">Yo'q kelmasam kerak</option>
       </select>
