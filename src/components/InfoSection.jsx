@@ -1,34 +1,78 @@
 import teamDebate from "../../public/img/team debate.jpg";
+import teamDebate2 from "../../public/img/team debate2.jpg";
 
 function InfoSection({ t }) {
   return (
-    <section className="relative h-screen overflow-hidden">
+    <section className="w-full bg-black">
 
-      {/* FIXED BACKGROUND IMAGE */}
-      <div
-        className="absolute inset-0 bg-center bg-cover bg-fixed"
-        style={{
-          backgroundImage: `url(${teamDebate})`,
-        }}
-      />
+      {/* ================= MOBILE VERSION ================= */}
+      <div className="block sm:hidden">
 
-      {/* DARK OVERLAY */}
-      <div className="absolute inset-0 bg-black/45" />
+        {/* IMAGE 1 */}
+        <div className="relative">
+          <img
+            src={teamDebate}
+            alt="Team Debate 1"
+            className="w-full h-auto object-cover"
+          />
+          <div className="absolute inset-0 bg-black/35" />
+        </div>
 
-      {/* CONTENT */}
-      <div className="relative z-10 h-full flex items-center justify-center px-6">
-        <div className="text-center text-white max-w-4xl">
-          
-          <p className="uppercase tracking-[0.35em] text-lg text-white/70 mb-2">
-            Visionaries 
-          </p>
-
-          <h2 className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 text-gray-400 leading-tight">
-            TEAM DEBATE
+        {/* TEXT */}
+        <div className="absolute z-10 ml-28 mb-5 text-center">
+          <h2 className="text-slate-900 text-4xl font-black leading-tight">
+            {t?.teamDebate1 || "TEAM"} <br />
+            {t?.teamDebate2 || "DEBATE"}
           </h2>
- 
+        </div>
+
+        {/* IMAGE 2 */}
+        <div className="relative">
+          <img
+            src={teamDebate2}
+            alt="Team Debate 2"
+            className="w-full h-auto object-cover"
+          />
+          <div className="absolute inset-0 bg-black/35" />
+        </div>
+
+      </div>
+
+      {/* ================= DESKTOP VERSION ================= */}
+      <div className="hidden sm:block relative">
+
+        <div className="relative h-[100vh] md:h-[180vh]">
+
+          {/* IMAGE 1 */}
+          <div
+            className="h-1/2 bg-center bg-cover bg-fixed"
+            style={{
+              backgroundImage: `url(${teamDebate})`,
+            }}
+          >
+            <div className="w-full h-full bg-black/45" />
+          </div>
+
+          {/* IMAGE 2 */}
+          <div
+            className="h-1/2 bg-center bg-cover bg-fixed"
+            style={{
+              backgroundImage: `url(${teamDebate2})`,
+            }}
+          >
+            <div className="w-full h-full bg-black/45" />
+          </div>
+
+          {/* CENTER TEXT */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <h2 className="text-slate-900 text-6xl md:text-7xl font-black text-center drop-shadow-2xl">
+              {t?.teamDebate1 || "TEAM"} {t?.teamDebate2 || "DEBATE"}
+            </h2>
+          </div>
+
         </div>
       </div>
+
     </section>
   );
 }

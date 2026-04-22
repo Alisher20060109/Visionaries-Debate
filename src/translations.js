@@ -104,9 +104,13 @@ Endi esa biz yangi bosqichni boshlayapmiz — ilk rasmiy turnirimizni.`,
     errorMsg: "Iltimos, barcha maydonlarni to'ldiring",
     successTitle: "Muvaffaqiyatli yuborildi!",
     successMsg: "Ma'lumotlaringiz qabul qilindi. Tez orada bog'lanamiz.",
+    teamDebate1: "JAMOA",
+teamDebate2: "DEBATI",
   },
 
   ru: {
+    teamDebate1: "КОМАНДНЫЕ",
+teamDebate2: "ДЕБАТЫ",
      modalTitle: "Регистрация",
     step1Sub: "Ваши данные",
     step2Sub: "Данные напарника",
@@ -214,6 +218,8 @@ Endi esa biz yangi bosqichni boshlayapmiz — ilk rasmiy turnirimizni.`,
   },
 
   en: {
+    teamDebate1: "TEAM",
+teamDebate2: "DEBATE",
      modalTitle: "Registration",
     step1Sub: "Your information",
     step2Sub: "Your partner's info",

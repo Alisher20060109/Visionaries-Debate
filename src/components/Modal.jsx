@@ -52,12 +52,12 @@ export default function Modal({ onClose, lang = "uz" }) {
 
 👤 ${form.firstName} ${form.lastName}
 📞 +998${form.phone}
-📱 ${form.telegram}
+📱 @${form.telegram}
 🏫 ${form.school}
 
 🤝 ${form.partnerName}
 📞 +998${form.partnerPhone}
-📱 ${form.partnerTelegram}
+📱 @${form.partnerTelegram}
 🏫 ${form.partnerSchool}
 
 🧠 ${form.topics}
@@ -129,8 +129,8 @@ export default function Modal({ onClose, lang = "uz" }) {
             <>
               <Field label="Ism" name="firstName" value={form.firstName} onChange={change} />
               <Field label="Familiya" name="lastName" value={form.lastName} onChange={change} />
-              <PhoneField label="Telefon" name="phone" value={form.phone} onChange={change} />
-              <Field label="Telegram" name="telegram" value={form.telegram} onChange={change} />
+              <PhoneField label="Telefon raqami" name="phone" value={form.phone} onChange={change} />
+              <Field label="Telegram username" name="telegram" value={form.telegram} onChange={change} />
               <Field label="Maktab" name="school" value={form.school} onChange={change} />
             </>
           )}
@@ -138,7 +138,7 @@ export default function Modal({ onClose, lang = "uz" }) {
           {step === 2 && (
             <>
               <Field label="Sherik Ismi" name="partnerName" value={form.partnerName} onChange={change} />
-              <Field label="Sherik Telegram" name="partnerTelegram" value={form.partnerTelegram} onChange={change} />
+              <Field label="Sherik Telegram username" name="partnerTelegram" value={form.partnerTelegram} onChange={change} />
               <PhoneField label="Sherik Telefon" name="partnerPhone" value={form.partnerPhone} onChange={change} />
               <Field label="Sherik Maktabi" name="partnerSchool" value={form.partnerSchool} onChange={change} />
             </>
@@ -147,14 +147,14 @@ export default function Modal({ onClose, lang = "uz" }) {
           {step === 3 && (
             <>
               <TextArea
-                label="Qaysi mavzularda qulaysiz?"
+                label="Qaysi mavzularda bahslashishni xohlaysiz?"
                 name="topics"
                 value={form.topics}
                 onChange={change}
               />
 
               <SelectBox
-                label="Tasdiq"
+                label="Siz debatga qatnashisha olasizmi?"
                 name="confirm"
                 value={form.confirm}
                 onChange={change}
