@@ -19,7 +19,7 @@ function InfoSection({ t }) {
         </div>
 
         {/* TEXT */}
-        <div className="absolute z-10 ml-28 mb-5 text-center">
+        <div className="absolute z-10 ml-30 mb-5 text-center">
           <h2 className="text-slate-900 text-4xl font-black leading-tight">
             {t?.teamDebate1 || "TEAM"} <br />
             {t?.teamDebate2 || "DEBATE"}
